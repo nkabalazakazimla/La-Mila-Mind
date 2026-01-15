@@ -1,3 +1,4 @@
+
 import { Badge } from './types';
 
 // Color Palette based on requirements
@@ -22,7 +23,7 @@ export const BADGES: Badge[] = [
 ];
 
 export const MASCOT_MESSAGES = {
-  welcome: ["Sawubona, I'm La-Mila your friend. Ready to learn?"],
+  welcome: ["Sawubona , I'm La-Mila your friend.Ready to learn ?"],
   correct: ["Yebo! You got it!", "High five! That was awesome.", "You're shining like a star!", "Spot on!"],
   incorrect: ["Good effort! Try again — you’re getting closer.", "Almost! Let’s think about it together.", "No worries, mistakes help us learn!", "Try one more time, friend."],
   loading: ["Fetching some brain food...", "Thinking up a challenge...", "Just a sec..."],

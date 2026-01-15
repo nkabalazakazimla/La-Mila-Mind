@@ -1,4 +1,5 @@
 {
-  "name": "La-Mila Mind",
-  "description": "An engaging, culturally relevant South African educational tool for Grade 4-6 learners using Gemini AI."
+  "name": "Copy of La-Mila Mind",
+  "description": "South African educational content generator for grades 4–6.",
+  "requestFramePermissions": []
 }

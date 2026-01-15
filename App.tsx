@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { generateEducationalContent } from './services/geminiService';
 import { Mascot } from './components/Mascot';
 import { AccessibilityMenu } from './components/AccessibilityMenu';
@@ -10,10 +11,9 @@ import {
   UserStats, 
   Subject,
   Grade,
-  Difficulty,
-  QuestionType 
+  Difficulty 
 } from './types';
-import { COLORS, MASCOT_MESSAGES, BADGES } from './constants';
+import { COLORS, MASCOT_MESSAGES } from './constants';
 
 const App: React.FC = () => {
   // --- STATE ---
@@ -92,10 +92,8 @@ const App: React.FC = () => {
       const newScore = stats.score + 10;
       const newStreak = stats.streak + 1;
       
-      // Update stats
       const newBadges = [...stats.badges];
       
-      // Check Badge Logic
       if (settings.subject === 'Mathematics' && stats.questionsAnswered % 5 === 4) {
          if(!newBadges.includes('math_star')) newBadges.push('math_star');
       }
@@ -112,11 +110,6 @@ const App: React.FC = () => {
       }));
 
       setMascotState({ message: getRandomMessage(MASCOT_MESSAGES.correct), emotion: 'celebrating' });
-      
-      // Play sound if enabled
-      if (accessibility.audioEnabled) {
-        // Placeholder for a sound effect logic
-      }
 
     } else {
       setFeedbackState('incorrect');
@@ -129,10 +122,9 @@ const App: React.FC = () => {
     if (!accessibility.audioEnabled) return;
     window.speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-ZA';
     window.speechSynthesis.speak(u);
   };
-
-  // --- RENDER HELPERS ---
 
   const baseClasses = `min-h-screen transition-colors duration-300 flex flex-col font-sans selection:bg-yellow-200
     ${accessibility.highContrast ? 'bg-white text-black' : 'bg-[#F0F9FF] text-gray-800'}
@@ -178,7 +170,6 @@ const App: React.FC = () => {
         
         {step === 'setup' && (
           <div className="max-w-xl mx-auto bg-white rounded-3xl p-6 md:p-10 shadow-xl animate-fade-in border-4 border-b-8" style={{ borderColor: COLORS.primaryBlue }}>
-            {/* "Let's Start Learning!" removed as requested */}
             
             <div className="space-y-6">
               {/* Grade Selection */}
@@ -254,7 +245,6 @@ const App: React.FC = () => {
 
         {step === 'quiz' && currentQuestion && (
           <div className="max-w-2xl mx-auto">
-            {/* Cultural Context Tag */}
             {currentQuestion.culturalContext && (
                <div className="inline-block px-3 py-1 rounded-full text-xs font-bold text-white mb-4 shadow-sm" style={{ backgroundColor: COLORS.accentPurple }}>
                  🌍 {currentQuestion.culturalContext}
@@ -263,7 +253,7 @@ const App: React.FC = () => {
 
             <div className="bg-white rounded-3xl p-6 md:p-10 shadow-xl border-4 border-b-8 relative overflow-hidden" style={{ borderColor: COLORS.primaryYellow }}>
               
-              {/* Question Audio Button - Optional visibility based on accessibility settings */}
+              {/* Question Audio Button - OPTIONAL/TOGGLEABLE */}
               {accessibility.audioEnabled && (
                 <button 
                   onClick={() => speakText(currentQuestion.text)}
@@ -374,28 +364,6 @@ const App: React.FC = () => {
 
       {showRewards && <Rewards stats={stats} onClose={() => setShowRewards(false)} />}
 
-      {/* Confetti Effect CSS (Simple) */}
-      {feedbackState === 'correct' && !accessibility.simpleMode && (
-         <div className="fixed inset-0 pointer-events-none z-40 overflow-hidden">
-            {[...Array(20)].map((_, i) => (
-               <div 
-                 key={i}
-                 className="absolute animate-confetti"
-                 style={{
-                   left: `${Math.random() * 100}%`,
-                   top: `-10%`,
-                   backgroundColor: [COLORS.primaryBlue, COLORS.primaryGreen, COLORS.primaryYellow, COLORS.accentRed][Math.floor(Math.random()*4)],
-                   width: '10px',
-                   height: '10px',
-                   animationDelay: `${Math.random() * 2}s`,
-                   animationDuration: `${2 + Math.random() * 3}s`
-                 }}
-               />
-            ))}
-         </div>
-      )}
-
-      {/* Inline Styles for animations without CSS file */}
       <style>{`
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }

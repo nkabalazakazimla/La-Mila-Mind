@@ -1,12 +1,12 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
 import { AppSettings, Question } from "../types";
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generateEducationalContent = async (settings: AppSettings): Promise<Question> => {
-  const model = "gemini-2.5-flash"; // Fast and capable for this task
+  const model = "gemini-3-flash-preview"; 
 
-  // Define the schema strictly to ensure UI doesn't break
   const schema = {
     type: Type.OBJECT,
     properties: {
@@ -46,25 +46,22 @@ export const generateEducationalContent = async (settings: AppSettings): Promise
       config: {
         responseMimeType: "application/json",
         responseSchema: schema,
-        temperature: 0.7, // Creative but accurate
+        temperature: 0.7,
       }
     });
 
     const data = JSON.parse(result.text || "{}");
     
-    // Add a client-side ID
     return {
       ...data,
       id: Date.now().toString(),
-      // Fallback for options if AI misses them on MC
       options: data.type === 'multiple-choice' && (!data.options || data.options.length === 0) 
-        ? ['Yes', 'No'] 
+        ? ['Option 1', 'Option 2', 'Option 3', 'Option 4'] 
         : data.options
     };
 
   } catch (error) {
     console.error("Gemini API Error:", error);
-    // Fallback static question to prevent app crash
     return {
       id: "fallback",
       text: "We had a little hiccup connecting to the brain center. Ready to try again?",
