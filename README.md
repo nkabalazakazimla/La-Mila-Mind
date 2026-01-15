@@ -1,20 +1,26 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
 
-# Run and deploy your AI Studio app
+# 🎓 LaMila‑Mind  
+### Interactive Learning Magic for South African Kids (Grades 4–6) 🇿🇦✨
 
-This contains everything you need to run your app locally.
+Welcome to **LaMila‑Mind** — a playful, punchy tool that helps create fun educational content for Intermediate Phase learners (ages 9–12).  
+No stiff grammar. No long explanations. Just smart, simple learning vibes. 😄
 
-View your app in AI Studio: https://ai.studio/apps/drive/1GPsJP3-zJYL6oa2H6v-7ww6E26_J2nYg
+---
 
-## Run Locally
+## 🌟 Why It Exists
+Learning shouldn’t feel like climbing a mountain.  
+South African learners deserve content that feels lively, local, and exciting — and teachers need a tool that helps them build it fast.
 
-**Prerequisites:**  Node.js
+LaMila‑Mind exists to make learning feel a bit more like:  
+👉 **“Hey… this is actually fun!”**
+
+---
+
+## ✨ Key Features
+- 🧠 **Interactive content generator** — create lessons, quizzes, summaries, stories & more.  
+- 🇿🇦 **Built for SA’s Intermediate Phase** — perfect for Grades 4–6 learners.  
+- 🎨 **Creative + kid‑friendly outputs** — colourful, playful, and easy to understand.  
+- ⚡ **Fast + simple** — no complicated setup or confusing menus.  
+- 📚 **CAPS‑aligned topics** — using local examples learners relate to.
 
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
